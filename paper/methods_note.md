@@ -1,0 +1,11 @@
+# When the Q-floor matters: HKSJ precision overstatement at Pairwise70 scale
+
+**Background.** The Hartung-Knapp-Sidik-Jonkman (HKSJ) confidence-interval adjustment is the RevMan-2025 default for random-effects meta-analyses with small k. Cochrane Handbook v6.5 §10.10.4.3 and advanced-stats convention require a `max(1, Q/(k−1))` floor on the HKSJ variance multiplier: when `Q ≤ k−1` — equivalently `I² = 0` — the un-floored HKSJ standard error narrows below the REML+Wald SE. Authors and software that omit the floor systematically overstate precision.
+
+**Methods.** We audited the entire Pairwise70 Cochrane CDSR corpus (n = 6,386 MAs) via cochrane-modern-re's pre-pooled outputs (REML τ², HKSJ with floor; input parquet SHA-256 pinned in the pre-registered spec). For every MA with `I² = 0` and `k ≥ 2` (D₁ = 3,677; 57.6% of corpus) we recomputed the un-floored HKSJ CI via an independent metafor pass with the floor block removed. For each MA we derived the CI-width ratio (floored ÷ un-floored) and a significance-loss flag. The Q=0 subset (n=141; 3.8% of D₁), where the un-floored SE is exactly zero, is reported separately because the ratio is unbounded.
+
+**Results.** On the well-defined D₁ᵃ subset (Q>0, n=3,536), the median CI-width ratio was **3.64×** (IQR 1.60–10.56; 95th percentile **57.4×**). Significance was lost in **17.08%** of D₁ᵃ. The effect was substantial across all k-strata (median ratios 3.10×–4.26×); significance-loss rates rose with k (8.6% at k=2; 25.1% at k≥10). The Q=0 subset (D₁ᵇ, n=141) lost significance in 24.8% with unbounded ratio. Mathematically required invariants — ratio ≥ 1, no sig-gain — held for every D₁ᵃ MA, confirming engine correctness against 3 hand-verified golden references at 1e-6 tolerance.
+
+**Limitations.** v0.1 establishes prevalence and per-MA impact under our own re-pooling; we do not claim any specific published Cochrane CI is incorrect (published-CI matching is v0.2). Pairwise only; NMAs out of scope. Sensitivity to PM/SJ τ² is v0.2.
+
+**Conclusion.** The HKSJ Q-floor is not a niche correction. It applies to 57.6% of the Cochrane CDSR; on the well-defined subset, omitting it overstates precision by a median factor of 3.64× and flips significance for ~1 in 6 MAs. RevMan-2025 already requires it; legacy R/Stata HKSJ code without the floor systematically inflates apparent confidence.
