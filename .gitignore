@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+renv/library/
+renv/staging/
+renv/local/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project-local session state (per operating rules)
+PROGRESS.md
+.progress_*.json
+
+# Large parquet inputs are SHA-pinned; copies live under data/inputs/
+# Source data files NOT versioned; checksums recorded in spec.md.
+data/inputs/*.parquet
+
+# Build / dist
+dist/
+build/
+
+# Notebook + scratch
+*.ipynb_checkpoints/
+scratch/
