@@ -35,17 +35,24 @@ Snapshots posted to web.archive.org are time-stamped by a third party independen
 | `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/tests/fixtures/golden_mas.json` | https://web.archive.org/web/20260512142518/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/tests/fixtures/golden_mas.json |
 | `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/data/inputs/full_method_results.sha256` | https://web.archive.org/web/20260512142650/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/data/inputs/full_method_results.sha256 |
 
-### 3. Bitcoin OTS stamp — DEFERRED
+### 3. Bitcoin OTS stamp — ACTIVE (submitted; Bitcoin attestation pending)
 
-Bitcoin OpenTimestamps was intended to provide a Bitcoin-anchored time-stamp of `docs/spec.md`, `data/inputs/full_method_results.sha256`, and `tests/fixtures/golden_mas.json`. The local `ots` CLI failed at import time under Python 3.13 (lessons.md: `opentimestamps-client 0.7.2 + python-bitcoinlib SSL loader looks for legacy libeay32.dll`). Documented resolutions:
+`docs/spec.md`, `data/inputs/full_method_results.sha256`, and `tests/fixtures/golden_mas.json` were OTS-stamped on 2026-05-12 via the WSL Ubuntu Python 3.12 toolchain (matching the ARAC workaround precedent in [[lessons_ots_python313_windows]]). The native Windows Python 3.13 `ots` CLI continues to fail at import time per `opentimestamps-client 0.7.2 + python-bitcoinlib SSL loader looks for legacy libeay32.dll`.
 
-1. Install Python 3.11/3.12 alongside and re-run `ots stamp` on the three files.
-2. Use the web stamper at opentimestamps.org (upload each file, save the `.ots` return file).
-3. Run inside Docker (or any non-Windows-3.13 environment).
+Submitted to 4 OpenTimestamps calendar servers:
+- `https://a.pool.opentimestamps.org`
+- `https://b.pool.opentimestamps.org`
+- `https://a.pool.eternitywall.com`
+- `https://ots.btc.catallaxy.com`
 
-When (1), (2), or (3) is done, the three resulting `.ots` files should be committed alongside the originals (path `docs/spec.md.ots`, `data/inputs/full_method_results.sha256.ots`, `tests/fixtures/golden_mas.json.ots`) and the SHA-256 of each `.ots` recorded here. This adds a Bitcoin-anchored timestamp on top of the git-tag + IA-snapshot pair.
+Receipt files committed alongside originals:
+- `docs/spec.md.ots`
+- `data/inputs/full_method_results.sha256.ots`
+- `tests/fixtures/golden_mas.json.ots`
 
-This omission does not invalidate the pre-registration — git tag + IA snapshot is itself a strong public commitment with independent timestamps — but it weakens the cryptographic claim from "anchored on Bitcoin" to "anchored on GitHub + Internet Archive".
+The stamps are in "pending" state until a Bitcoin block confirms them (typically 12–48 hours after submission). To upgrade later: `wsl ~/.local/bin/ots upgrade <file>.ots`; then `ots verify <file>.ots` will report the Bitcoin block hash + height. Once upgraded, the receipt files should be re-committed with the upgraded payload (the SHA-256 of each .ots file will change after upgrade).
+
+This adds a Bitcoin-anchored timestamp on top of the git-tag + IA-snapshot pair, completing the three-source pre-registration (git, IA, Bitcoin).
 
 ### 2b. v0.1.0 IA snapshots
 
