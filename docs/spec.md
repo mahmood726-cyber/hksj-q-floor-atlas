@@ -71,7 +71,7 @@ Overall headline (D₁ pooled):
 
 These freeze on `prereg-v0.0.1` tag + IA snapshot + Bitcoin OTS-stamp. Any change → AMENDMENTS.md entry, new tag, new OTS stamp.
 
-1. **Input parquet:** `cochrane-modern-re/outputs/full_method_results.parquet` at SHA-256 `<computed and pinned at copy time, before any compute>`.
+1. **Input parquet:** `cochrane-modern-re/outputs/full_method_results.parquet` at SHA-256 `31434fb118c6ec44a025eeb43a90e35ef9e050711fa45aa2cb5c1244b2d89751`.
 2. **Study-level data source:** `cochrane-modern-re.src.loaders.iter_mas_with_log()` reading from `PAIRWISE70_DIR` env var; the Pairwise70 corpus checksum is treated as cochrane-modern-re's contract (their pre-reg covers it).
 3. **τ² estimator:** REML only. PM, SJ, Bayesian explicitly deferred to v0.2.
 4. **HKSJ degrees of freedom:** t-distribution with `df = k − 1`. Matches advanced-stats.md and cochrane-modern-re. Not `qnorm`.

@@ -24,9 +24,11 @@ Thumbs.db
 PROGRESS.md
 .progress_*.json
 
-# Large parquet inputs are SHA-pinned; copies live under data/inputs/
-# Source data files NOT versioned; checksums recorded in spec.md.
+# Large parquet inputs: the canonical input parquet IS versioned (SHA-pinned in spec.md §1.5);
+# future / intermediate parquets are NOT.
 data/inputs/*.parquet
+!data/inputs/full_method_results.parquet
+!data/inputs/full_method_results.sha256
 
 # Build / dist
 dist/
