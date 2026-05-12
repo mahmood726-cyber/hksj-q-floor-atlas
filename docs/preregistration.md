@@ -47,6 +47,14 @@ When (1), (2), or (3) is done, the three resulting `.ots` files should be commit
 
 This omission does not invalidate the pre-registration — git tag + IA snapshot is itself a strong public commitment with independent timestamps — but it weakens the cryptographic claim from "anchored on Bitcoin" to "anchored on GitHub + Internet Archive".
 
+### 2b. v0.1.0 IA snapshots
+
+| URL | Wayback snapshot |
+|---|---|
+| `https://mahmood726-cyber.github.io/hksj-q-floor-atlas/` (Pages) | https://web.archive.org/web/20260512143042/https://mahmood726-cyber.github.io/hksj-q-floor-atlas/ |
+| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/v0.1.0/outputs/atlas.csv` | https://web.archive.org/web/20260512143059/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/v0.1.0/outputs/atlas.csv |
+| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/v0.1.0/CHANGELOG.md` | https://web.archive.org/web/20260512143110/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/v0.1.0/CHANGELOG.md |
+
 ## Replication contract
 
 Anyone with this repo + the `prereg-v0.0.1` tag + access to a Pairwise70 corpus + cochrane-modern-re can:
