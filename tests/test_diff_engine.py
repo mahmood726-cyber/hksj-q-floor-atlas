@@ -79,6 +79,28 @@ class TestComputeImpactRow:
         assert math.isclose(out["ci_width_ratio"], 1.0, abs_tol=1e-9)
         assert out["sig_loss"] is False
 
+    def test_q_zero_handled(self):
+        """Q=0 case: unfloored width is 0; ratio is +inf, is_q_zero=True."""
+        unfloored = _row(0.3, 0.0, 0.3, 0.3)    # zero-width CI at estimate
+        floored   = _row(0.3, 0.1, -0.1, 0.7)   # widened by floor, includes 0
+        out = compute_impact_row(unfloored, floored)
+        assert out["is_q_zero"] is True
+        assert math.isinf(out["ci_width_ratio"])
+        assert out["sig_unfloored"] is True    # 0.3 > 0 so the point is significant
+        assert out["sig_floored"] is False     # CI now includes 0
+        assert out["sig_loss"] is True
+
+    def test_q_zero_estimate_at_null_not_significant(self):
+        """Q=0 case where estimate is exactly the null: not significant unfloored."""
+        unfloored = _row(0.0, 0.0, 0.0, 0.0)
+        floored   = _row(0.0, 0.1, -0.2, 0.2)
+        out = compute_impact_row(unfloored, floored)
+        assert out["is_q_zero"] is True
+        assert math.isinf(out["ci_width_ratio"])
+        assert out["sig_unfloored"] is False   # CI is [0,0], doesn't EXCLUDE 0
+        assert out["sig_floored"] is False
+        assert out["sig_loss"] is False
+
 
 class TestJoinFlooredUnfloored:
     def test_inner_join_on_ma_id(self):
