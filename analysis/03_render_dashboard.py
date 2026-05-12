@@ -17,7 +17,7 @@ log = logging.getLogger(__name__)
 
 ATLAS = ROOT / "outputs" / "atlas.csv"
 PER_MA = ROOT / "outputs" / "per_ma_results.parquet"
-PAGES = ROOT / "pages"
+PAGES = ROOT / "docs"
 
 
 def main():
