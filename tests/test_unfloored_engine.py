@@ -68,3 +68,21 @@ class TestBatch:
         ])
         assert len(results) == 2
         assert {r.ma_id for r in results} == {"A", "B"}
+
+
+class TestGoldens:
+    """Engine output must match independent metafor reference within 1e-6."""
+
+    @pytest.mark.parametrize("idx", [0, 1, 2])
+    def test_golden_matches_reference(self, golden_mas, idx):
+        g = golden_mas[idx]
+        if g["unfloored_expected"] is None:
+            pytest.fail(f"golden_mas[{idx}].unfloored_expected not filled in")
+        req = UnfloorRequest(ma_id=g["ma_id"], yi=g["yi"], vi=g["vi"])
+        res = run_unfloored_hksj(req)
+        exp = g["unfloored_expected"]
+        for field in ["estimate", "se", "ci_lo", "ci_hi"]:
+            assert abs(getattr(res, field) - exp[field]) < 1e-6, (
+                f"{g['ma_id']}: {field} engine={getattr(res, field):.10f} "
+                f"ref={exp[field]:.10f}"
+            )
