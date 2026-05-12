@@ -82,7 +82,13 @@ def main():
     log.info("wrote %s", ATLAS)
 
     # Print headline for human review
-    overall = atlas[atlas["stratum"] == "overall"].iloc[0]
+    overall_rows = atlas[atlas["stratum"] == "overall"]
+    if overall_rows.empty:
+        raise RuntimeError(
+            "stratify_atlas() did not emit an 'overall' row; cannot print headline. "
+            "This indicates a bug in src.stratify."
+        )
+    overall = overall_rows.iloc[0]
     print("\n=== HEADLINE (D1a, Q>0) ===")
     print(f"  n = {int(overall['n'])}")
     print(f"  median CI-width ratio:  {overall['median_ci_width_ratio']:.3f}x")

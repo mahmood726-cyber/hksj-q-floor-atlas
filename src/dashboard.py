@@ -82,7 +82,13 @@ def render_dashboard(atlas: pd.DataFrame, per_ma: pd.DataFrame,
     for i, (_, row) in enumerate(examples_df.iterrows()):
         _render_forest(row, assets / f"forest_{i}.png")
 
-    overall = atlas[atlas["stratum"] == "overall"].iloc[0]
+    overall_rows = atlas[atlas["stratum"] == "overall"]
+    if overall_rows.empty:
+        raise ValueError(
+            "atlas must contain a row with stratum=='overall'; "
+            "passed atlas has strata: " + ", ".join(map(str, atlas["stratum"].tolist()))
+        )
+    overall = overall_rows.iloc[0]
     strata = atlas[atlas["stratum"] != "overall"]
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)),
