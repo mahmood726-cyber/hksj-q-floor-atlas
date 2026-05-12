@@ -6,6 +6,7 @@ Batched: groups of 50 MAs per Rscript invocation.
 from __future__ import annotations
 
 import logging
+import os
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -14,7 +15,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, r"C:\Projects\cochrane-modern-re")
+_cmre_dir = os.environ.get("COCHRANE_MODERN_RE_DIR", "")
+if _cmre_dir:
+    sys.path.insert(0, _cmre_dir)
 
 from src.load_inputs import filter_to_d1, load_full_method_results  # noqa: E402
 from src.unfloored_engine import UnfloorRequest, run_unfloored_batch  # noqa: E402

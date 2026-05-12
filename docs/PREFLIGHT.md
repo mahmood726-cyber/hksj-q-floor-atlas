@@ -7,12 +7,12 @@
 | Prereq | Status | Notes |
 |---|---|---|
 | `cochrane-modern-re/outputs/full_method_results.parquet` | OK | 19,158 rows; 3 methods × 6,386 MAs |
-| `cochrane-modern-re/src/paths_local.py` | OK | Resolves `DEFAULT_PAIRWISE70 = C:\Projects\Pairwise70\data` |
-| `C:\Projects\Pairwise70\data\` | OK | `.rda` files per MA present |
-| `cochrane-modern-re.src.loaders.iter_mas_with_log` | OK | Importable via `sys.path.insert` |
-| R 4.5.2 | OK | `C:\Program Files\R\R-4.5.2\bin\Rscript.exe` |
+| `cochrane-modern-re/src/paths_local.py` | OK | Resolves `DEFAULT_PAIRWISE70` to local Pairwise70 data dir (set via `COCHRANE_MODERN_RE_DIR` env var) |
+| Pairwise70 data dir (via `PAIRWISE70_DIR` or `paths_local.py`) | OK | `.rda` files per MA present |
+| `cochrane-modern-re.src.loaders.iter_mas_with_log` | OK | Importable via `COCHRANE_MODERN_RE_DIR` env var |
+| R 4.5.2 | OK | resolved via `Rscript` on PATH or standard install location |
 | `metafor` R package | OK | v4.8.0 |
-| `ots` CLI | Present at `C:\Users\user\AppData\Local\Programs\Python\Python313\Scripts\ots.EXE` | Per lessons.md may fail under Python 3.13 SSL libeay32; web-stamper fallback available at opentimestamps.org |
+| `ots` CLI | Present (system PATH) | Per lessons.md may fail under Python 3.13 SSL libeay32; web-stamper fallback available at opentimestamps.org |
 
 ## Plan deviation
 

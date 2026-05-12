@@ -7,10 +7,13 @@ later by scripts/fill_goldens.py via an independent metafor call.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
-sys.path.insert(0, r"C:\Projects\cochrane-modern-re")
+_cmre = os.environ.get("COCHRANE_MODERN_RE_DIR", "")
+if _cmre:
+    sys.path.insert(0, _cmre)
 sys.path.insert(0, ".")
 
 from src.load_inputs import filter_to_d1, load_full_method_results  # noqa: E402

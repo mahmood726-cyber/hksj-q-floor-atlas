@@ -15,7 +15,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-COCHRANE_PARQUET = Path(r"C:\Projects\cochrane-modern-re\outputs\full_method_results.parquet")
+_cmre_default = os.environ.get("COCHRANE_MODERN_RE_DIR", "")
+COCHRANE_PARQUET = (
+    Path(_cmre_default) / "outputs" / "full_method_results.parquet"
+    if _cmre_default
+    else Path("outputs") / "full_method_results.parquet"  # will fail exists() check below
+)
 LOCAL_PARQUET = ROOT / "data" / "inputs" / "full_method_results.parquet"
 LOCAL_SHA = ROOT / "data" / "inputs" / "full_method_results.sha256"
 
@@ -26,7 +31,9 @@ def _resolve_pairwise70_dir() -> tuple[Path | None, str]:
     if env and Path(env).exists():
         return Path(env), f"env var PAIRWISE70_DIR={env}"
     try:
-        sys.path.insert(0, r"C:\Projects\cochrane-modern-re")
+        cmre = os.environ.get("COCHRANE_MODERN_RE_DIR", "")
+        if cmre:
+            sys.path.insert(0, cmre)
         from src.paths_local import DEFAULT_PAIRWISE70  # type: ignore[import-untyped]
         if DEFAULT_PAIRWISE70 and DEFAULT_PAIRWISE70.exists():
             return DEFAULT_PAIRWISE70, f"paths_local.py DEFAULT_PAIRWISE70={DEFAULT_PAIRWISE70}"
