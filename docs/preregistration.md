@@ -30,10 +30,10 @@ Snapshots posted to web.archive.org are time-stamped by a third party independen
 
 | URL | Wayback snapshot |
 |---|---|
-| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/docs/spec.md` | (filled after IA snapshot) |
-| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/tree/prereg-v0.0.1` | (filled after IA snapshot) |
-| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/tests/fixtures/golden_mas.json` | (filled after IA snapshot) |
-| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/data/inputs/full_method_results.sha256` | (filled after IA snapshot) |
+| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/docs/spec.md` | https://web.archive.org/web/20260512142257/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/docs/spec.md |
+| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/tree/prereg-v0.0.1` | https://web.archive.org/web/20260512142439/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/tree/prereg-v0.0.1 |
+| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/tests/fixtures/golden_mas.json` | https://web.archive.org/web/20260512142518/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/tests/fixtures/golden_mas.json |
+| `https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/data/inputs/full_method_results.sha256` | https://web.archive.org/web/20260512142650/https://github.com/mahmood726-cyber/hksj-q-floor-atlas/blob/prereg-v0.0.1/data/inputs/full_method_results.sha256 |
 
 ### 3. Bitcoin OTS stamp — DEFERRED
 
