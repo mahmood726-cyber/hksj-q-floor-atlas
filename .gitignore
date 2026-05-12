@@ -43,3 +43,5 @@ scratch/
 
 # Derived compute outputs (large binary; not committed)
 outputs/*.parquet
+# atlas.csv is committed as the primary deliverable
+!outputs/atlas.csv
