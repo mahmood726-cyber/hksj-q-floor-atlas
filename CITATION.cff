@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "HKSJ Q-Floor Atlas: a Pairwise70 audit of HKSJ floor impact"
+authors:
+  - family-names: "Mahmood"
+    given-names: "M"
+version: "0.0.1"
+date-released: "2026-05-12"
+license: MIT
+repository-code: "https://github.com/mahmood726-cyber/hksj-q-floor-atlas"
