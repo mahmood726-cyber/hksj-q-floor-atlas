@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HKSJ Q-Floor Atlas v0.1.0</title>
+<style>
+body { font-family: Georgia, "Times New Roman", serif; max-width: 960px;
+       margin: 2em auto; padding: 0 1em; color: #222; line-height: 1.5; }
+h1, h2 { font-weight: normal; }
+table { border-collapse: collapse; margin: 1em 0; }
+th, td { padding: 0.4em 0.8em; border: 1px solid #999; text-align: right; }
+th { background: #eee; }
+td:first-child, th:first-child { text-align: left; }
+.headline { font-size: 1.2em; background: #f5f5dc; padding: 1em;
+            border-left: 4px solid #888; }
+img { max-width: 100%; height: auto; margin: 1em 0; }
+.footnote { font-size: 0.85em; color: #666; }
+</style>
+</head>
+<body>
+
+<h1>HKSJ Q-Floor Atlas &mdash; v0.1.0</h1>
+
+<p>Pairwise70 audit of HKSJ Q-floor impact in the I&sup2;=0 regime.
+See <a href="https://github.com/mahmood726-cyber/hksj-q-floor-atlas">repository</a>
+for the spec, pre-registration, and source code.</p>
+
+<div class="headline">
+<strong>Headline (overall, D&#x2081; pooled, n={{ overall.n }}):</strong>
+median CI-width ratio (floored &divide; unfloored) = <strong>{{ "%.2f"|format(overall.median_ci_width_ratio) }}&times;</strong>
+(IQR {{ "%.2f"|format(overall.q25_ci_width_ratio) }}&ndash;{{ "%.2f"|format(overall.q75_ci_width_ratio) }};
+95th pct {{ "%.2f"|format(overall.p95_ci_width_ratio) }}&times;).
+Significance lost in <strong>{{ "%.1f"|format(overall.pct_sig_loss) }}%</strong> of D&#x2081;.
+</div>
+
+<h2>k-stratified results</h2>
+<table>
+<tr><th>Stratum</th><th>n</th><th>median ratio</th><th>IQR</th><th>95th pct</th><th>% sig-loss</th></tr>
+{% for r in strata %}
+<tr>
+  <td>{{ r.stratum }}</td>
+  <td>{{ r.n }}</td>
+  <td>{{ "%.2f"|format(r.median_ci_width_ratio) if r.median_ci_width_ratio == r.median_ci_width_ratio else "&mdash;" }}</td>
+  <td>{{ "%.2f"|format(r.q25_ci_width_ratio) }}&ndash;{{ "%.2f"|format(r.q75_ci_width_ratio) if r.q25_ci_width_ratio == r.q25_ci_width_ratio else "&mdash;" }}</td>
+  <td>{{ "%.2f"|format(r.p95_ci_width_ratio) if r.p95_ci_width_ratio == r.p95_ci_width_ratio else "&mdash;" }}</td>
+  <td>{{ "%.1f"|format(r.pct_sig_loss) if r.pct_sig_loss == r.pct_sig_loss else "&mdash;" }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h2>CI-width ratio distribution</h2>
+<img src="assets/ratio_histogram.png" alt="Histogram of CI-width ratios on log-x">
+
+<h2>Three worked examples</h2>
+{% for ex in examples %}
+<h3>{{ ex.ma_id }} (k={{ ex.k }})</h3>
+<img src="assets/forest_{{ loop.index0 }}.png" alt="Forest plot for {{ ex.ma_id }}">
+{% endfor %}
+
+<p class="footnote">
+Generated {{ generated_at }} from atlas.csv. All values reproducible from
+spec.md pre-reg + cochrane-modern-re full_method_results.parquet
+(SHA-256 pinned in spec.md &sect;1.5.1). License: MIT.
+</p>
+
+</body>
+</html>
