@@ -73,8 +73,12 @@ def render_dashboard(atlas: pd.DataFrame, per_ma: pd.DataFrame,
     assets = out_dir / "assets"
     assets.mkdir(parents=True, exist_ok=True)
 
-    _render_histogram(per_ma, assets / "ratio_histogram.png")
-    examples_df = _select_examples(per_ma)
+    # Histogram on D1a (Q>0) only; D1b ratios are inf and would break log-x
+    per_ma_finite = per_ma[per_ma["ci_width_ratio"].apply(
+        lambda x: x != float('inf') and x == x  # finite and not NaN
+    )]
+    _render_histogram(per_ma_finite, assets / "ratio_histogram.png")
+    examples_df = _select_examples(per_ma_finite)
     for i, (_, row) in enumerate(examples_df.iterrows()):
         _render_forest(row, assets / f"forest_{i}.png")
 

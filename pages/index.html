@@ -26,36 +26,87 @@ See <a href="https://github.com/mahmood726-cyber/hksj-q-floor-atlas">repository<
 for the spec, pre-registration, and source code.</p>
 
 <div class="headline">
-<strong>Headline (overall, D&#x2081; pooled, n={{ overall.n }}):</strong>
-median CI-width ratio (floored &divide; unfloored) = <strong>{{ "%.2f"|format(overall.median_ci_width_ratio) }}&times;</strong>
-(IQR {{ "%.2f"|format(overall.q25_ci_width_ratio) }}&ndash;{{ "%.2f"|format(overall.q75_ci_width_ratio) }};
-95th pct {{ "%.2f"|format(overall.p95_ci_width_ratio) }}&times;).
-Significance lost in <strong>{{ "%.1f"|format(overall.pct_sig_loss) }}%</strong> of D&#x2081;.
+<strong>Headline (overall, D&#x2081; pooled, n=3536):</strong>
+median CI-width ratio (floored &divide; unfloored) = <strong>3.64&times;</strong>
+(IQR 1.60&ndash;10.56;
+95th pct 57.38&times;).
+Significance lost in <strong>17.1%</strong> of D&#x2081;.
 </div>
 
 <h2>k-stratified results</h2>
 <table>
 <tr><th>Stratum</th><th>n</th><th>median ratio</th><th>IQR</th><th>95th pct</th><th>% sig-loss</th></tr>
-{% for r in strata %}
+
 <tr>
-  <td>{{ r.stratum }}</td>
-  <td>{{ r.n }}</td>
-  <td>{{ "%.2f"|format(r.median_ci_width_ratio) if r.median_ci_width_ratio == r.median_ci_width_ratio else "&mdash;" }}</td>
-  <td>{{ "%.2f"|format(r.q25_ci_width_ratio) }}&ndash;{{ "%.2f"|format(r.q75_ci_width_ratio) if r.q25_ci_width_ratio == r.q25_ci_width_ratio else "&mdash;" }}</td>
-  <td>{{ "%.2f"|format(r.p95_ci_width_ratio) if r.p95_ci_width_ratio == r.p95_ci_width_ratio else "&mdash;" }}</td>
-  <td>{{ "%.1f"|format(r.pct_sig_loss) if r.pct_sig_loss == r.pct_sig_loss else "&mdash;" }}</td>
+  <td>k=2</td>
+  <td>627</td>
+  <td>4.26</td>
+  <td>1.92&ndash;18.13</td>
+  <td>119.71</td>
+  <td>8.6</td>
 </tr>
-{% endfor %}
+
+<tr>
+  <td>k=3</td>
+  <td>425</td>
+  <td>3.64</td>
+  <td>1.72&ndash;19.00</td>
+  <td>94.56</td>
+  <td>12.9</td>
+</tr>
+
+<tr>
+  <td>k=4-5</td>
+  <td>640</td>
+  <td>3.10</td>
+  <td>1.62&ndash;14.18</td>
+  <td>63.03</td>
+  <td>13.1</td>
+</tr>
+
+<tr>
+  <td>k=6-9</td>
+  <td>660</td>
+  <td>3.18</td>
+  <td>1.49&ndash;9.57</td>
+  <td>45.38</td>
+  <td>17.3</td>
+</tr>
+
+<tr>
+  <td>k&gt;=10</td>
+  <td>1184</td>
+  <td>3.80</td>
+  <td>1.49&ndash;8.51</td>
+  <td>30.21</td>
+  <td>25.1</td>
+</tr>
+
+<tr>
+  <td>Q=0 (D1b)</td>
+  <td>141</td>
+  <td>inf</td>
+  <td>inf&ndash;inf</td>
+  <td>inf</td>
+  <td>24.8</td>
+</tr>
+
 </table>
 
 <h2>CI-width ratio distribution</h2>
 <img src="assets/ratio_histogram.png" alt="Histogram of CI-width ratios on log-x">
 
 <h2>Three worked examples</h2>
-{% for ex in examples %}
-<h3>{{ ex.ma_id }} (k={{ ex.k }})</h3>
-<img src="assets/forest_{{ loop.index0 }}.png" alt="Forest plot for {{ ex.ma_id }}">
-{% endfor %}
+
+<h3>CD014585_pub2_data__A6 (k=2)</h3>
+<img src="assets/forest_0.png" alt="Forest plot for CD014585_pub2_data__A6">
+
+<h3>CD015849_pub2_data__A25 (k=5)</h3>
+<img src="assets/forest_1.png" alt="Forest plot for CD015849_pub2_data__A25">
+
+<h3>CD000402_pub5_data__A4 (k=28)</h3>
+<img src="assets/forest_2.png" alt="Forest plot for CD000402_pub5_data__A4">
+
 
 <p class="footnote">
 Note: <strong>n=141 of 3,677 D&#x2081; MAs (3.83%)</strong> have <em>Q = 0</em>
@@ -65,7 +116,7 @@ subset (Q&gt;0, n=3,536). See <a href="https://github.com/mahmood726-cyber/hksj-
 </p>
 
 <p class="footnote">
-Generated {{ generated_at }} from atlas.csv. All values reproducible from
+Generated 2026-05-12 13:22 UTC from atlas.csv. All values reproducible from
 spec.md pre-reg + cochrane-modern-re full_method_results.parquet
 (SHA-256 pinned in spec.md &sect;1.5.1). License: MIT.
 </p>
