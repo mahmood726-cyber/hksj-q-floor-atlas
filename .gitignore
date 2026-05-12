@@ -40,3 +40,6 @@ tests/fixtures/golden_mas_reference.json
 # Notebook + scratch
 *.ipynb_checkpoints/
 scratch/
+
+# Derived compute outputs (large binary; not committed)
+outputs/*.parquet
